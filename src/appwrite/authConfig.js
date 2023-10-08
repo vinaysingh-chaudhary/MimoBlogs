@@ -23,7 +23,7 @@ export class Authentication{
                return createUserAccount; 
            }   
         } catch (error) {
-            throw error
+            console.log(error); 
         }
     }
 
@@ -39,16 +39,16 @@ export class Authentication{
         try {
             return await this.account.deleteSessions();
         } catch (error) {
-            throw(error); 
+            console.log(error); 
         }
     }
 
-    async getCurrentUser({}){
+    async getCurrentUser(){
         //we getting current user so that, if user direclty open home screen, our app should know na if user is login or not :) 
         try {
             return await this.account.get();        //will return the value of user or something, will check on frontend hehe 
         } catch (error) {
-            throw(error); 
+            console.log(error); 
         }
 
         return null;    //because if this.account.get didn't return anything, then it by default return null instead of some error value
@@ -57,8 +57,8 @@ export class Authentication{
 }
 
 
-const authService = new Authentication();
+const authConfig = new Authentication();
 
-export default authService; 
+export default authConfig; 
 
 
