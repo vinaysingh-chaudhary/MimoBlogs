@@ -2,9 +2,11 @@ import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import LoadingScreen from './LoadingScreen/LoadingScreen'
 import Button from './Button/Button'
-import Input from './Loginform/input'
+import Input from './Forms/input'
 import Select from './Select/Select'
-import LoginForm from './Loginform/LoginForm'
+import LoginForm from './Forms/LoginForm'
+import Signup from './Forms/SignupForm'
+import AuthLayout from './AuthLayout/AuthLayout'
 
 export {
     Header,
@@ -13,5 +15,7 @@ export {
     Button,
     Input,
     Select,
-    LoginForm
+    LoginForm,
+    Signup,
+    AuthLayout
 }

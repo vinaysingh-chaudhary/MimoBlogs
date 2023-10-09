@@ -32,7 +32,8 @@ const LoginForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(loginUser)}>
+            {/*  handle sumbit is a method of react-form */}
+            <form onSubmit={handleSubmit(loginUser)}>   
                <Input 
                     label={"Email"} 
                     placeholder={"Enter Your Email"} 
@@ -46,12 +47,17 @@ const LoginForm = () => {
 
 
                <Input 
-                    label={"Password"}  
-                    placeholder={"Password"} 
-                    type={"password"}
-                    {...register("password")}
+                    label="Password : "  
+                    placeholder="Password"
+                    type= "password"
+                    {...register("password", {
+                        required:true
+                    })}
                     />
-               <Button children={"Login"}/> 
+               <Button
+                label="Login"
+                type= "submit"
+                /> 
             </form>
             
         </div>
