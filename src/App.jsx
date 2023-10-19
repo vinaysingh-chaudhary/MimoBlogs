@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import authConfig from './appwrite/authConfig'; 
 import { login, logout } from "./store/slices/authSlice";
-import { LoadingScreen, LoginForm, Signup, AuthLayout } from "./Components/compConfig";
+import { LoadingScreen, LoginForm, Signup, AuthLayout, TextEditor } from "./Components/compConfig";
 
 
 
@@ -46,7 +46,11 @@ function App() {
       <p>Signup form</p>
       <Signup />
 
-      <AuthLayout />
+      {/* <AuthLayout /> */}
+
+      <p>Real time text editor</p>
+       {/* <TextEditor /> */}
+
 
   </div>
   ) 

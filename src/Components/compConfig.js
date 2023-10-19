@@ -7,6 +7,7 @@ import Select from './Select/Select'
 import LoginForm from './Forms/LoginForm'
 import Signup from './Forms/SignupForm'
 import AuthLayout from './AuthLayout/AuthLayout'
+import TextEditor from './TextEditor/TextEditor'
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     Select,
     LoginForm,
     Signup,
-    AuthLayout
+    AuthLayout, 
+    TextEditor
 }
