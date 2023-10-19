@@ -5,8 +5,8 @@ import { Controller } from 'react-hook-form'
 const TextEditor = ({name, label, control, defaultValue = ""}) => {
   return (
     <div>
-      Text Editor huun bhai me 
 
+    <p>{label}</p>
       <Controller 
         name = {name || "Content"}
         control={control}

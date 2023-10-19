@@ -5,9 +5,11 @@ import Button from './Button/Button'
 import Input from './Forms/input'
 import Select from './Select/Select'
 import LoginForm from './Forms/LoginForm'
-import Signup from './Forms/SignupForm'
+import SignUpForm from './Forms/SignupForm'
 import AuthLayout from './AuthLayout/AuthLayout'
 import TextEditor from './TextEditor/TextEditor'
+import BlogForm from './BlogForm/BlogForm'
+import BlogCard from './BlogCard/BlogCard'
 
 export {
     Header,
@@ -17,7 +19,9 @@ export {
     Input,
     Select,
     LoginForm,
-    Signup,
+    SignUpForm,
     AuthLayout, 
-    TextEditor
+    TextEditor,
+    BlogForm,
+    BlogCard
 }

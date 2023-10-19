@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Input, Button, Select, TextEditor } from '../../Components/compConfig'
@@ -33,11 +33,11 @@ const BlogForm = ({Blog}) => {
 
           if(UpdateBlog){}
 
-       }else{    
+      }else{    
        
       const file = await storageConfig.uploadFile(data.articleimage[0]);
           if(file){
-             data.articleimage = file !== null ? file.$id : undefined
+             data.articleimage = file.$id;
            }
 
       const UploadBlog = await databaseConfig.PostBlog({
@@ -46,12 +46,89 @@ const BlogForm = ({Blog}) => {
       })
 
       if(UploadBlog){}
-       }
+      }
   }
+
+  const slugGenerator = (value) => {
+    if(typeof(value) ==='string'){
+      return value.trim().toLowerCase().replace(/\s/g, '-'); 
+    }else{
+      return ''
+    }
+  }
+
+  useEffect(() => {
+    const subscription = watch((value, {name}) => {
+        if(name === 'title'){
+          setValue('slug', slugGenerator(value.title, {shouldValidate : true}))
+        }
+    })
+
+    return( () => {
+      subscription.unsubscribe(); 
+    })
+
+  },[watch, setValue, slugGenerator])
 
   return (
     <div>
-      
+      <form onSubmit={handleSubmit(submitBlogForm)}>
+
+        <Input 
+          label = "Title : "
+          placeholder="Enter your Blog Title"
+          {...register("title", {
+            required : true
+          })}
+        />
+
+          <Input 
+            label = "Slug : "
+            placeholder = "Slug"
+            {...register("slug", {
+              required : true
+            })}
+
+            onInput = {(e) => {setValue("slug", 
+            slugGenerator(e.currentTarget.value), 
+              {shouldValidate : true})}
+            }
+          />
+
+            <TextEditor 
+                name = "content : "
+                label = "content"
+                control={control}
+                defaultValue={getValues("content")}
+            />
+
+            <Input 
+            type="file"
+            label= "article image"
+            accept = "image/png, image/jpg, image/jpeg, image/gif"
+            {...register("articleimage")}
+            />
+
+
+            <div>
+              {/* <img src={storageConfig.getFilePreview(Blog.articleimage)} alt={Blog.title} /> */}
+            </div>
+
+            <div>
+              <Select 
+                  options={["Active", "Inactive"]}
+                  label = "Status"
+                  {...register("status", {
+                    required:true
+                  })}
+              />
+            </div>
+
+            <Button 
+              type="submit"
+              label={Blog? "Update" : "Submit"}
+            />
+      </form>
     </div>
   )
   }

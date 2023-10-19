@@ -9,11 +9,14 @@ import { useNavigate, Link } from "react-router-dom";
 
 const LoginForm = () => {
 
-    const {register, handleSubmit} = useForm(); 
+    const {register, handleSubmit, getValues} = useForm(); 
     const dispatch = useDispatch(); 
     // const navigate = useNavigate(); 
 
+
+
     const loginUser = async(userData) => {
+        console.log(userData)
         try { 
             const session = await authConfig.loginUser(userData);    //returns us a session,
             if(session){
@@ -54,6 +57,7 @@ const LoginForm = () => {
                         required:true
                     })}
                     />
+                    
                <Button
                 label="Login"
                 type= "submit"

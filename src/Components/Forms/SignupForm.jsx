@@ -3,14 +3,22 @@ import {useForm} from "react-hook-form"
 import authConfig from "../../appwrite/authConfig";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slices/authSlice";
+import { useState } from "react";
 
-const Signup = ( ) => {
+const SignUpForm = ( ) => {
 
     const {register, handleSubmit} = useForm(); 
     const dispatch = useDispatch();
 
+
+
+
+
+
    
     const SignUpUser = async(signupData) => {
+        console.log(signupData)
+
         try {
             const session = await authConfig.createAccount(signupData); 
             if(session){
@@ -29,16 +37,16 @@ const Signup = ( ) => {
         <div>
             <p>Already have an account ? <span className="text-blue-300">Login</span></p>
 
-            <form onSubmit={handleSubmit(SignUpUser)}></form>
+            <form onSubmit={handleSubmit(SignUpUser)}>
 
-            <Input  
+            {/* <Input  
                 label = "Your Name : "
                 type = "text"
                 placeholder = "Enter your name"
                 {...register("name", {
                     required:true
                 })}
-            />
+            /> */}
 
 
             <Input  
@@ -64,8 +72,10 @@ const Signup = ( ) => {
                 label="SignUp"
                 />
 
+            </form>
+
         </div>
     )
 }
 
-export default Signup;
+export default SignUpForm;

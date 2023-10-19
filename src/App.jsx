@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import authConfig from './appwrite/authConfig'; 
 import { login, logout } from "./store/slices/authSlice";
-import { LoadingScreen, LoginForm, Signup, AuthLayout, TextEditor } from "./Components/compConfig";
+import { LoadingScreen} from "./Components/compConfig";
+import { Outlet } from "react-router-dom";
 
 
 
@@ -18,7 +19,7 @@ function App() {
         if(currentUser){ 
           dispatch(login({currentUser}))
         }else{
-          dispatch(logout())  //payloading currentuser data as object in authslice 
+          dispatch(logout())  
        }}
 
       catch (error) {
@@ -35,22 +36,8 @@ function App() {
   return !loading 
   ? (
   <div className="pl-4">
-    {/* <Header />
-    <Footer />
-    <Button children={"Submit"}/>
-    <Input label={"hello"} placeholder={"Enter Email"} type={"password"}/>
-    <Select options={["opt1", "opt2", "opt3"]}  label={"SELECT  "}/> */}
 
-    <LoginForm />
-
-      <p>Signup form</p>
-      <Signup />
-
-      {/* <AuthLayout /> */}
-
-      <p>Real time text editor</p>
-       {/* <TextEditor /> */}
-
+    <Outlet />
 
   </div>
   ) 

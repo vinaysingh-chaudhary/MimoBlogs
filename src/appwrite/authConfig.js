@@ -14,6 +14,7 @@ export class Authentication{
         this.account = new Account(this.client);
     }
 
+
     async createAccount ({email, password}){
         try {
            const createUserAccount = await this.account.create(ID.unique(), email, password);
@@ -27,9 +28,10 @@ export class Authentication{
         }
     }
 
+
     async loginUser({email,password}){
         try {
-         return await account.createEmailSession(email, password); 
+         return await this.account.createEmailSession(email, password); 
         } catch (error) {
             console.log(error);
         }

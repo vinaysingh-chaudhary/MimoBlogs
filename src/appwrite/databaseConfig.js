@@ -1,17 +1,17 @@
 import config from "../config/config";
-import { Client, databases, } from "appwrite";
+import { Client, Databases} from "appwrite";
+
 
 export class DBServices{
     client = new Client();
     databases; 
-
 
     constructor(){
         this.client
                 .setEndpoint(config.appwriteURL)
                 .setProject(config.projectId)
             
-        this.databases = new databases(this.client);
+        this.databases = new Databases(this.client);
     }
 
     async createPost({title, slug, content, articleimage, userId, status}){
@@ -72,24 +72,23 @@ export class DBServices{
                 slug
             )
         } catch (error) {
-            console.log(error);
+            throw(error);
         }
     }
 
-    async getPosts(queries=[query.equal("status", "active")]){
+    async getPosts(){
         try {
-            return await databases.listDocuments(
+            return await this.databases.listDocuments(
                 config.databaseId,
                 config.articleCollectionId,
-                queries,
             )
         } catch (error) {
-            console.log(error);
+            throw(error);
         }
     }
 }
 
 
-const services = new DBServices(); 
+const databaseConfig = new DBServices(); 
 
 export default databaseConfig; 
