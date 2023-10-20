@@ -9,7 +9,7 @@ const Select = ({ options, label, ...props }, ref) => {
 
             <select id={id} {...props} ref={ref} >
                 {options?.map((option) =>{ 
-                    return <option value={option} key={id}>
+                    return <option value={option} key={option}>
                                     {option}
                                 </option>})}
             </select>

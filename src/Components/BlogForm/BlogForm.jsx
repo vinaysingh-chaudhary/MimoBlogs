@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useId } from 'react'
 import { useSelector } from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Input, Button, Select, TextEditor } from '../../Components/compConfig'
 import databaseConfig from '../../appwrite/databaseConfig'
 import storageConfig from '../../appwrite/storageConfig'
+import { useNavigate } from 'react-router-dom'
 
 const BlogForm = ({Blog}) => {
 
-  const useData = useSelector(store => store.authentication.useData); 
+
+  const userData = useSelector(store => store.authentication.userData); 
+  const userid = userData?.currentUser?.$id
+
+  const navigate = useNavigate();
 
 
   const {register, handleSubmit, watch, setValue, getValues,  control} = useForm({
@@ -20,32 +25,37 @@ const BlogForm = ({Blog}) => {
   }); 
 
  const submitBlogForm = async(data) => { 
-     if(Blog){      
-         const file = data.articleimage[0] ? storageConfig.uploadFile(data.articleimage[0]) : null      
-            if(file){
-               storageConfig.deleteFile(Blog.articleimage)  
+     if(Blog){   
+
+         const File = data?.articleimage[0] ? await storageConfig.uploadFile(data?.articleimage[0]) : null      
+            if(File){
+               storageConfig.deleteFile(Blog?.articleimage)  
             }
 
-            const UpdateBlog = await databaseConfig.updatePost(Blog.$id, {
+            const UpdateBlog = await databaseConfig.updatePost(Blog?.$id, {
               ...data, 
-            articleimage : file ? file.$id : undefined,  
+            articleimage : File ? File.$id : undefined,  
           })
 
-          if(UpdateBlog){}
+          if(UpdateBlog){
+            navigate("/")
+          }
 
       }else{    
-       
-      const file = await storageConfig.uploadFile(data.articleimage[0]);
+
+      const file = await storageConfig.uploadFile(data?.articleimage[0]);
           if(file){
-             data.articleimage = file.$id;
+             data.articleimage = file?.$id;
            }
 
-      const UploadBlog = await databaseConfig.PostBlog({
+      const UploadBlog = await databaseConfig.createPost({
         ...data, 
-        userId : useData.$id 
+        userId : userid
       })
 
-      if(UploadBlog){}
+      if(UploadBlog){
+        navigate("/")
+      }
       }
   }
 
@@ -96,8 +106,7 @@ const BlogForm = ({Blog}) => {
           />
 
             <TextEditor 
-                name = "content : "
-                label = "content"
+                name = "content"
                 control={control}
                 defaultValue={getValues("content")}
             />

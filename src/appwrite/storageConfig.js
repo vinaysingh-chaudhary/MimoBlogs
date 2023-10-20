@@ -14,12 +14,12 @@ export class storageService{
     }
 
 
-    async uploadFile(file){
+    async uploadFile(File){
         try {
             return await this.storage.createFile(    //this will return the id of the file which we will use createpost's arguments (ariticleimg)
                 config.bucketId,
                 ID.unique(),         //this unique id is for file
-                file
+                File
             )
         } catch (error) {
             console.log(error);

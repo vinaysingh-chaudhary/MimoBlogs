@@ -12,6 +12,7 @@ const TextEditor = ({name, label, control, defaultValue = ""}) => {
         control={control}
         render={({field: {onChange}}) => (
             <Editor
+            
             initialValue="<p>This is the initial content of the editor.</p>"
             init={{
               initialValue: defaultValue, 

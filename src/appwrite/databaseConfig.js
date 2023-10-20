@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, Databases} from "appwrite";
+import { Client, Databases, Query} from "appwrite";
 
 
 export class DBServices{
@@ -14,7 +14,8 @@ export class DBServices{
         this.databases = new Databases(this.client);
     }
 
-    async createPost({title, slug, content, articleimage, userId, status}){
+    async createPost({title, slug, content, articleimage,status, userId }){
+        console.log(title)
         try {
             return await this.databases.createDocument(
                 config.databaseId, 
@@ -64,23 +65,24 @@ export class DBServices{
         }
     }
 
-    async getDocument(slug){
+    async getDocument(docId){
         try {
             return await this.databases.getDocument(
                 config.databaseId,
                 config.articleCollectionId,
-                slug
+                docId
             )
         } catch (error) {
             throw(error);
         }
     }
 
-    async getPosts(){
+    async getPosts(queries=[Query.equal("status", "active")]){
         try {
             return await this.databases.listDocuments(
                 config.databaseId,
                 config.articleCollectionId,
+                queries,
             )
         } catch (error) {
             throw(error);

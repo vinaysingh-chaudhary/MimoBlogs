@@ -37,32 +37,31 @@ const routeConfig = createBrowserRouter([
         {
           path : "/blog/:id", 
           element: (
-            <AuthLayout authentication={true}>
+            <AuthLayout >  
                 <ReadBlog />
             </AuthLayout>)
         },
         {
           path : "/blogs", 
           element: (
-            <AuthLayout authentication={true} >
+            <AuthLayout authentication>
                 <ListBlogs />
             </AuthLayout>)
         },
         {
           path : "/edit/:id", 
           element: (
-            <AuthLayout authentication={true}>
+            <AuthLayout authentication>
                 <EditBlog />
             </AuthLayout>)
         },
         {
           path : "/create", 
           element: (
-            <AuthLayout authentication={true}>
+            <AuthLayout authentication>
                 <CreateBlog />
             </AuthLayout>)
         },
-
     ]
   }
 ])

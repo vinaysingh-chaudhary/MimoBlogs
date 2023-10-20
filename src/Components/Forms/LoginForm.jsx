@@ -11,7 +11,7 @@ const LoginForm = () => {
 
     const {register, handleSubmit, getValues} = useForm(); 
     const dispatch = useDispatch(); 
-    // const navigate = useNavigate(); 
+    const navigate = useNavigate(); 
 
 
 
@@ -23,7 +23,7 @@ const LoginForm = () => {
                 const currentUser = await authConfig.getCurrentUser();   //now if the session is created, then get the user details
                 if (currentUser){
                     dispatch(login(currentUser))         //will save the userDetails in login details 
-                    // navigate("/")
+                    navigate("/")
                 }
             }
         } catch (error) {

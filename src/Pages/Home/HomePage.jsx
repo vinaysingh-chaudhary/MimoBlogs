@@ -9,12 +9,16 @@ const HomePage = () => {
     const [Blogs, setBlogs] = useState([])
 
     useEffect(() => {
-        databaseConfig.getPosts().then((respone) => console.log(respone))
 
-     
+
+        getBlogs();
     },[])
 
-
+    const getBlogs = async() => {
+        const allBlogs = await databaseConfig.getPosts(); 
+        console.log(allBlogs)
+        setBlogs(allBlogs.documents); 
+    } 
 
     const logout = async() =>{
         await authConfig.logoutUser().then((status) => console.log(status)); 
@@ -23,9 +27,13 @@ const HomePage = () => {
     const authentication = useSelector(store => store.authentication); 
     console.log(authentication)
 
-
     return(
         <div>
+            {
+                Blogs.map((blog) => {
+                    return <BlogCard {...blog} key={blog.$id}/>
+                })
+            }
             <Button label={"logout"} onClick={() => logout()}/>
         </div>
     )

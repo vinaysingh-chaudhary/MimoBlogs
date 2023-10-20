@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import config from "../config/config";
 import { Client, Account, ID } from "appwrite";
 
@@ -22,16 +23,17 @@ export class Authentication{
                 this.loginUser(email, password)
            } else {
                return createUserAccount; 
-           }   
+           }
         } catch (error) {
             console.log(error); 
         }
     }
 
 
-    async loginUser({email,password}){
+    async loginUser({email,password, name}){
         try {
-         return await this.account.createEmailSession(email, password); 
+         return await this.account.createEmailSession(email, password, name); 
+         
         } catch (error) {
             console.log(error);
         }

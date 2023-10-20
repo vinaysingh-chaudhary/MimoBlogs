@@ -1,21 +1,18 @@
 import { Input, Button } from "../compConfig";
 import {useForm} from "react-hook-form"
 import authConfig from "../../appwrite/authConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/slices/authSlice";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUpForm = ( ) => {
 
     const {register, handleSubmit} = useForm(); 
     const dispatch = useDispatch();
+    const navigate = useNavigate(); 
 
-
-
-
-
-
-   
     const SignUpUser = async(signupData) => {
         console.log(signupData)
 
@@ -24,8 +21,8 @@ const SignUpForm = ( ) => {
             if(session){
                 const currentUser = await authConfig.getCurrentUser(); 
                 if(currentUser){
-                    dispatch(login(currentUser))
-                }
+                    dispatch(login(currentUser)); 
+                    }
             }
         } catch (error) {
             console.log(error);
@@ -39,14 +36,14 @@ const SignUpForm = ( ) => {
 
             <form onSubmit={handleSubmit(SignUpUser)}>
 
-            {/* <Input  
+            <Input  
                 label = "Your Name : "
                 type = "text"
                 placeholder = "Enter your name"
                 {...register("name", {
                     required:true
                 })}
-            /> */}
+            />
 
 
             <Input  
@@ -58,6 +55,7 @@ const SignUpForm = ( ) => {
                 })}
             />
 
+                <p>password should be 8 char</p>
             <Input  
                 label = "Password : "
                 type = "password"

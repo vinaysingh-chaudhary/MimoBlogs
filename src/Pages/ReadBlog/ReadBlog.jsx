@@ -1,59 +1,67 @@
 import React, {useState, useEffect} from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import databaseConfig from "../../appwrite/databaseConfig";
 import { Button } from "../../Components/compConfig";
 import storageConfig  from "../../appwrite/storageConfig";
 
 
-
-
 const ReadBlog = () => {
 
-    const {slug} = useParams(); 
+    const {id} = useParams(); 
     const navigate = useNavigate(); 
     const [blog, setBlogData] = useState(); 
+    const userData = useSelector(store => store.authentication.userData);
+    const [fileId, setFileId] = useState('')
 
-    const userData = useSelector(store => store.authentication.useData);
 
-    const isAuthorised = blog && userData ? post.userId === userData.$id : false; 
+    const htmlString = blog?.content; // Assuming blog.content is the HTML string
+    const parser = new DOMParser();
+    const parsedHtml = parser.parseFromString(htmlString, 'text/html');
+    const plainText = parsedHtml.body.textContent;
+
+
+
+    const isAuthorised = blog && userData ? blog.userId === userData.currentUser?.$id : false; 
 
     useEffect(() => {
         const getBlog = async() => {
-            const blog = await databaseConfig.getDocument(slug); 
+            const blog = await databaseConfig.getDocument(id) 
+            const fileId = storageConfig.getFilePreview(blog?.articleimage)
             setBlogData(blog); 
+            setFileId(fileId);
         }
 
-        getBlog();
-    }, [slug, navigate])
+        if(id){
+            getBlog(id); 
+        }
+    },[id, navigate]); 
 
 
     const deleteBlog = async() => {
-        databaseConfig.deletePost(blog.$id).then((status) => {
+        databaseConfig.deletePost(blog?.$id).then((status) => {
             if(status){
-                storageConfig.deleteFile(blog.articleimage);
-                //navigate
+                storageConfig.deleteFile(blog?.articleimage);
+                navigate("/")
             }
         })
     }
-
-
 
     return ( 
         <div>
             <p>Hello</p>
                 <div >
-                    <img src={storageConfig.getFilePreview(blog.articleimage)} alt={blog.title} />
+                    <img src={fileId} alt={blog?.title} />
                 </div>
 
-                <p>{blog.title}</p>
-                <p>{blog.content}</p>
+                <p>{blog?.title}</p>
+               <div>{plainText}</div> 
 
                 
 
                 {isAuthorised && (
                     <div>
-                        <Button label={"Edit"}/>
+                      <NavLink to={`/edit/${id}`}><Button label={"Edit"}/></NavLink>  
                         <Button label={"Delete"}  onClick ={() => deleteBlog()} />
                     </div>
                 )}

@@ -5,23 +5,23 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const EditBlog = () => {
 
-    const {slug} = useParams(); 
+    const {id} = useParams(); 
     const navigate = useNavigate();
     const [Blog, setBlogData] = useState(); 
     
     useEffect(() => {
         const getBlog = async() => {
-            const blog = await databaseConfig.getDocument(slug); 
+            const blog = await databaseConfig.getDocument(id); 
             setBlogData(blog); 
+     
         }
 
-        if(slug){
+        if(id){
             getBlog(); 
         }
-    },[slug, navigate]); 
+    },[id, navigate]); 
 
-
-
+    
     return (
         <div>
             <BlogForm Blog={Blog} />

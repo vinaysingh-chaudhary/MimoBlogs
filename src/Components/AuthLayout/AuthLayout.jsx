@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { LoadingScreen } from "../compConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
@@ -11,14 +11,12 @@ const AuthLayout = ( {children , authentication= true}) => {
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true)
 
-
      useEffect(() => {
-            if( authentication && authStatus !== authentication){        //true || false !== true (false is not equal to true ? yes the statement is true) -> true (so navigate to login)
-                navigate("/login")
-            } else if( !authentication && authStatus !== authentication){      //true || true === true => true (so navigate to home screen)
-                navigate("/")
-            }
-
+        if(authentication && authStatus !== authentication){
+            navigate("/login")
+        } else if(!authentication && authStatus !== authentication){
+            navigate('/')
+        }
             setLoader(false);
 
      }, [authStatus, navigate, authentication])
