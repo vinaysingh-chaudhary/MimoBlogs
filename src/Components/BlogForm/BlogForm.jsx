@@ -10,7 +10,7 @@ const BlogForm = ({Blog}) => {
 
 
   const userData = useSelector(store => store.authentication.userData); 
-  const userid = userData?.currentUser?.$id
+  const userid = userData?.currentUser?.$id || userData?.$id
 
   const navigate = useNavigate();
 
@@ -105,11 +105,21 @@ const BlogForm = ({Blog}) => {
             }
           />
 
-            <TextEditor 
+          <Input 
+               label = "Title : "
+              placeholder="Enter your Blog Title"
+                   {...register("content", {
+                required : true
+          })}
+        />
+
+            {/* <TextEditor 
                 name = "content"
                 control={control}
                 defaultValue={getValues("content")}
-            />
+            /> */}
+
+
 
             <Input 
             type="file"

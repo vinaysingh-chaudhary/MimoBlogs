@@ -22,6 +22,7 @@ const SignUpForm = ( ) => {
                 const currentUser = await authConfig.getCurrentUser(); 
                 if(currentUser){
                     dispatch(login(currentUser)); 
+                    navigate("/login")
                     }
             }
         } catch (error) {
@@ -32,7 +33,7 @@ const SignUpForm = ( ) => {
 
     return (
         <div>
-            <p>Already have an account ? <span className="text-blue-300">Login</span></p>
+            
 
             <form onSubmit={handleSubmit(SignUpUser)}>
 

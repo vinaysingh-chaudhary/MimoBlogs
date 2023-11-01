@@ -11,25 +11,21 @@ const ReadBlog = () => {
     const {id} = useParams(); 
     const navigate = useNavigate(); 
     const [blog, setBlogData] = useState(); 
+    const [loading, setLoader] = useState(true); 
+
     const userData = useSelector(store => store.authentication.userData);
-    const [fileId, setFileId] = useState('')
+    const [imgPreview, setImgPreview] = useState('')
 
 
-    const htmlString = blog?.content; // Assuming blog.content is the HTML string
-    const parser = new DOMParser();
-    const parsedHtml = parser.parseFromString(htmlString, 'text/html');
-    const plainText = parsedHtml.body.textContent;
-
-
-
-    const isAuthorised = blog && userData ? blog.userId === userData.currentUser?.$id : false; 
+    const isAuthorised = blog?.userId == userData?.currentUser?.$id ? true : false; 
+    console.log(isAuthorised);
 
     useEffect(() => {
         const getBlog = async() => {
             const blog = await databaseConfig.getDocument(id) 
             const fileId = storageConfig.getFilePreview(blog?.articleimage)
             setBlogData(blog); 
-            setFileId(fileId);
+            setImgPreview(fileId);
         }
 
         if(id){
@@ -48,23 +44,29 @@ const ReadBlog = () => {
     }
 
     return ( 
-        <div>
-            <p>Hello</p>
-                <div >
-                    <img src={fileId} alt={blog?.title} />
+        <div className=" w-full h-full text-white flex justify-around items-start">
+               
+                <div className="w-[30%] pl-2 flex justify-center">
+                    <img src={imgPreview} alt={blog?.title}  className=" h-full object-contain rounded-lg mt-12 "/>
                 </div>
 
-                <p>{blog?.title}</p>
-               <div>{plainText}</div> 
+                <div className="w-[70%] h-full flex flex-col overflow-y-scroll gap-6 pt-10 px-6">
+                    <p className="text-2xl">{blog?.title}</p>
+                    <div>{blog?.content}</div> 
 
+                    {isAuthorised && (
+                    <div className="flex justify-center gap-5 pb-3">
+                      <NavLink to={`/edit/${id}`}><Button label={"Edit"}/></NavLink>  
+                      <Button label={"Delete"}  onClick ={() => deleteBlog()} />
+                    </div>
+                     )}
+
+                </div>
+                
                 
 
-                {isAuthorised && (
-                    <div>
-                      <NavLink to={`/edit/${id}`}><Button label={"Edit"}/></NavLink>  
-                        <Button label={"Delete"}  onClick ={() => deleteBlog()} />
-                    </div>
-                )}
+
+
 
                     
  

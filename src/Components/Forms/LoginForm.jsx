@@ -35,8 +35,23 @@ const LoginForm = () => {
 
     return (
         <div>
-            {/*  handle sumbit is a method of react-form */}
+
+          <p>Don't have an account ? <span className="text-blue-300" onClick={() => navigate("/signup")}>SignUp</span></p>
+
             <form onSubmit={handleSubmit(loginUser)}>   
+
+            <Input 
+                    label={"name"} 
+                    placeholder={"Enter Your name"} 
+                    type={"text"}
+                    onChange={(event) => console.log(event.target.value)}
+                    {...register("name", {
+                       required : true, 
+                       
+                    })}
+                    />
+
+
                <Input 
                     label={"Email"} 
                     placeholder={"Enter Your Email"} 

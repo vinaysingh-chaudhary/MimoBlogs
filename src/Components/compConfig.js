@@ -10,6 +10,8 @@ import AuthLayout from './AuthLayout/AuthLayout'
 import TextEditor from './TextEditor/TextEditor'
 import BlogForm from './BlogForm/BlogForm'
 import BlogCard from './BlogCard/BlogCard'
+import NavbarDesktop from './Navbar/Navbar_Desktop'
+import BlogContainer from './BlogContainer/BlogContainer'
 
 export {
     Header,
@@ -23,5 +25,7 @@ export {
     AuthLayout, 
     TextEditor,
     BlogForm,
-    BlogCard
+    BlogCard,
+    NavbarDesktop,
+    BlogContainer
 }

@@ -1,55 +1,69 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import authConfig from './appwrite/authConfig'; 
+import authConfig from './appwrite/authConfig';
 import { login, logout } from "./store/slices/authSlice";
-import { LoadingScreen} from "./Components/compConfig";
+import { LoadingScreen, NavbarDesktop} from "./Components/compConfig";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 
 
+
+
 function App() {
-  const [loading, setLoading] = useState(true); 
-  const dispatch = useDispatch(); 
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const userData = useSelector((store) => store.authentication); 
+  console.log(userData); 
 
 
   useEffect(() => {
-    const getCurrentUserFunc = async() => {
+    const getCurrentUserFunc = async () => {
       try {
-        const currentUser = await authConfig.getCurrentUser(); 
-        if(currentUser){ 
-          dispatch(login({currentUser}))
-        }else{
-          dispatch(logout())  
-       }}
+        const currentUser = await authConfig.getCurrentUser();
+        if (currentUser) {
+          dispatch(login({ currentUser }))
+        } else {
+          dispatch(logout())
+        }
+      }
 
       catch (error) {
         console.log(error);
       }
     }
 
-    getCurrentUserFunc(); 
+    getCurrentUserFunc();
     setLoading(false);
-  },[])
+  }, [])
 
-  
 
-  return !loading 
-  ? (
-  <div className="pl-4">
 
-    <nav><ul>
-     <NavLink to="/"><li>home</li></NavLink> 
-     <NavLink to="/login"><li>login</li></NavLink> 
-     <NavLink to="/create"><li>create</li></NavLink> 
-     <NavLink to="/signup"><li>Signup</li></NavLink> 
-    </ul></nav>
+  return !loading
+    ? (
+      <div className="w-screen h-screen bg-[#000000]">
 
-    <Outlet />
+        <div className="h-[10vh] w-full">
+          <NavbarDesktop />
+        </div>
 
-  </div>
-  ) 
-  : (<LoadingScreen/>)
+
+       <div className="h-[80vh] w-full">
+          <Outlet />
+        </div>
+
+        <div>
+          
+        </div>
+
+      </div>
+    )
+
+
+
+
+
+    : (<LoadingScreen />)
 }
 
 export default App

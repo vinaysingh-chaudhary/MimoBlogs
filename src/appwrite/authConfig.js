@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import config from "../config/config";
 import { Client, Account, ID } from "appwrite";
-
-
 export class Authentication{
     client = new Client(); 
     account; 
@@ -16,14 +14,14 @@ export class Authentication{
     }
 
 
-    async createAccount ({email, password}){
+    async createAccount ({email, password, name}){
         try {
-           const createUserAccount = await this.account.create(ID.unique(), email, password);
-           if (createUserAccount) {     //if account is created or there, then direclty login  (that is why we called loginAccount function becasue we already have email and password)
-                this.loginUser(email, password)
-           } else {
-               return createUserAccount; 
-           }
+           const userAccount = await this.account.create(ID.unique(), email, password, name);
+           if (userAccount) {
+            return this.loginUser({email, password});
+        } else {
+           return  userAccount;
+        }
         } catch (error) {
             console.log(error); 
         }
@@ -33,7 +31,7 @@ export class Authentication{
     async loginUser({email,password, name}){
         try {
          return await this.account.createEmailSession(email, password, name); 
-         
+
         } catch (error) {
             console.log(error);
         }

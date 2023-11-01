@@ -5,8 +5,9 @@ import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { HomePage, ErrorPage,ReadBlog, CreateBlog, EditBlog, LoginPage, SignUpPage, ListBlogs } from './Pages/PageConfig.js'
+import { HomePage, ErrorPage,ReadBlog, CreateBlog, EditBlog, LoginPage, SignUpPage, AboutPage } from './Pages/PageConfig.js'
 import { AuthLayout } from './Components/compConfig.js'
+
 
 
 const routeConfig = createBrowserRouter([
@@ -37,16 +38,9 @@ const routeConfig = createBrowserRouter([
         {
           path : "/blog/:id", 
           element: (
-            <AuthLayout >  
+
                 <ReadBlog />
-            </AuthLayout>)
-        },
-        {
-          path : "/blogs", 
-          element: (
-            <AuthLayout authentication>
-                <ListBlogs />
-            </AuthLayout>)
+)
         },
         {
           path : "/edit/:id", 
@@ -61,6 +55,10 @@ const routeConfig = createBrowserRouter([
             <AuthLayout authentication>
                 <CreateBlog />
             </AuthLayout>)
+        },
+        {
+          path : "/about", 
+          element: (<AboutPage />)
         },
     ]
   }
