@@ -10,14 +10,11 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
   const [likeCount, setLikeCount] = useState(like);
   const [isLiked, setIsLiked] = useState("unliked");
 
-  console.log(isLiked);
-
   const likeHandler = async () => {
     if (isLiked === "unliked") {
       setIsLiked("liked");
       const likeCount = await databaseConfig.updateLike(`${$id}`);
       setLikeCount(likeCount);
-      
     } else {
       setIsLiked("unliked");
       const likeCount = await databaseConfig.updateSubtractedLike(`${$id}`);
@@ -39,11 +36,9 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
         onClick={() => navigate(`/blog/${$id}`)}
       />
 
-      <div className="flex flex-col gap-1 justify-around pl-2 py-5">
+      <div className="flex flex-col gap-1 justify-around pl-2 py-5 relative">
         <div>
-          <p className="text-[#454545]">
-            {date} <span className="text-white">Like : {likeCount}</span>
-          </p>
+          <p className="text-[#454545]">{date}</p>
           <p className="text-2xl" onClick={() => navigate(`/blog/${$id}`)}>
             {title?.length > 40 ? `${title?.slice(0, 35)}...` : title}
           </p>
@@ -53,12 +48,11 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
           {content?.length > 100 ? `${content?.slice(0, 150)}...` : content}
         </p>
 
-        <button className="border-2" onClick={() => likeHandler()}>
-          {isLiked === "liked" ? (
-            <AiFillHeart className="text-red-500" />
-          ) : (
-            <AiOutlineHeart />
-          )}
+        <button className="absolute bottom-2 right-3 flex gap-2 justify-center items-center" onClick={() => likeHandler()}>
+          <span>{likeCount}</span>
+          {isLiked === "liked" 
+          ? (<AiFillHeart className="text-red-500 text-2xl" />) 
+          :  (<AiOutlineHeart  className="text-2xl"/>)}
         </button>
       </div>
     </div>
