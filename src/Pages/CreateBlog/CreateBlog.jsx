@@ -3,7 +3,7 @@ import { BlogForm } from "../../Components/compConfig";
 
 const CreateBlog = () => {
     return( 
-        <div>
+        <div className=" w-screen h-[90vh]">
             <BlogForm />
         </div>
     ); 

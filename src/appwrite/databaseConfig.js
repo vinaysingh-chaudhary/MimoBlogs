@@ -1,5 +1,7 @@
 import config from "../config/config";
-import { Client, Databases, Query} from "appwrite";
+import { Client, Databases} from "appwrite";
+
+
 
 
 export class DBServices{
@@ -77,7 +79,7 @@ export class DBServices{
         }
     }
 
-    async getPosts(queries=[Query.equal("status", "active")]){
+    async getPosts(queries){
         try {
             return await this.databases.listDocuments(
                 config.databaseId,
@@ -88,6 +90,60 @@ export class DBServices{
             throw(error);
         }
     }
+
+
+    async updateLike(documentID) {
+        try {
+          const document = await this.databases.getDocument(
+            config.databaseId,
+            config.articleCollectionId,
+            documentID
+          );
+    
+          const likeCount = document.like || 0; 
+          this.updatedLikeCount = likeCount + 1; 
+    
+           await this.databases.updateDocument(
+            config.databaseId,
+            config.articleCollectionId,
+            documentID,
+            {
+              like: this.updatedLikeCount,
+            }
+          );
+
+          return this.updatedLikeCount; 
+        } catch (error) {
+          throw error;
+        }
+    }
+
+    async updateSubtractedLike(documentID) {
+        try {
+          const document = await this.databases.getDocument(
+            config.databaseId,
+            config.articleCollectionId,
+            documentID
+          );
+    
+          const likeCount = document.like || 0; 
+          this.updateSubtracted = likeCount === 0 ? 0 : likeCount - 1; 
+    
+           await this.databases.updateDocument(
+            config.databaseId,
+            config.articleCollectionId,
+            documentID,
+            {
+              like: this.updateSubtracted,
+            }
+          );
+          
+          return this.updateSubtracted
+        } catch (error) {
+          throw error;
+        }
+    }
+
 }
 
 

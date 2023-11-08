@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import config from "../config/config";
-import { Client, Account, ID } from "appwrite";
+import { Client, Account, ID} from "appwrite";
+
+
+
 export class Authentication{
     client = new Client(); 
     account; 
@@ -46,15 +48,26 @@ export class Authentication{
     }
 
     async getCurrentUser(){
-        //we getting current user so that, if user direclty open home screen, our app should know na if user is login or not :) 
         try {
-            return await this.account.get();        //will return the value of user or something, will check on frontend hehe 
+            return await this.account.get();        
         } catch (error) {
             console.log(error); 
         }
 
-        return null;    //because if this.account.get didn't return anything, then it by default return null instead of some error value
+        return null;   
     }
+
+
+    async getUserDetails(userId){
+        try {
+            const user = await this.users.get(userId); 
+            return user; 
+        } catch (error) {
+            throw(error); 
+        }
+
+    }
+
 
 }
 

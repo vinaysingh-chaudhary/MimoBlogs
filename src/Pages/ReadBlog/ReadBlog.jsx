@@ -11,7 +11,21 @@ const ReadBlog = () => {
     const {id} = useParams(); 
     const navigate = useNavigate(); 
     const [blog, setBlogData] = useState(); 
-    const [loading, setLoader] = useState(true); 
+    const [loading, setLoader] = useState(true);
+    
+
+    const [processedText, setProcessedText] = useState('');
+
+    const textModifier = () => {
+        const textWithLineBreaks = blog?.content?.split('\n').map((line, index) => (
+          <span key={index}>
+            {line}
+            <br />
+          </span>
+        ));
+        setProcessedText(textWithLineBreaks);
+      };
+
 
     const userData = useSelector(store => store.authentication.userData);
     const [imgPreview, setImgPreview] = useState('')
@@ -33,6 +47,10 @@ const ReadBlog = () => {
         }
     },[id, navigate]); 
 
+    useEffect(() => {
+        textModifier(); 
+    },[blog])
+
 
     const deleteBlog = async() => {
         databaseConfig.deletePost(blog?.$id).then((status) => {
@@ -43,6 +61,8 @@ const ReadBlog = () => {
         })
     }
 
+    // console.log(blog?.content)
+
     return ( 
         <div className=" w-full h-full text-white flex justify-around items-start">
                
@@ -50,9 +70,9 @@ const ReadBlog = () => {
                     <img src={imgPreview} alt={blog?.title}  className=" h-full object-contain rounded-lg mt-12 "/>
                 </div>
 
-                <div className="w-[70%] h-full flex flex-col overflow-y-scroll gap-6 pt-10 px-6">
-                    <p className="text-2xl">{blog?.title}</p>
-                    <div>{blog?.content}</div> 
+                <div className="w-[70%] h-full flex flex-col overflow-y-scroll gap-6 pt-10 px-6 no-scrollbar">
+                    <p className="text-4xl">{blog?.title}</p>
+                    <div className="">{processedText}</div> 
 
                     {isAuthorised && (
                     <div className="flex justify-center gap-5 pb-3">
@@ -62,15 +82,6 @@ const ReadBlog = () => {
                      )}
 
                 </div>
-                
-                
-
-
-
-
-                    
- 
-
         </div>
     )
 }

@@ -7,11 +7,11 @@ import Select from './Select/Select'
 import LoginForm from './Forms/LoginForm'
 import SignUpForm from './Forms/SignupForm'
 import AuthLayout from './AuthLayout/AuthLayout'
-import TextEditor from './TextEditor/TextEditor'
 import BlogForm from './BlogForm/BlogForm'
 import BlogCard from './BlogCard/BlogCard'
-import NavbarDesktop from './Navbar/Navbar_Desktop'
+import NavbarDesktop from './Navbar/NavbarDesktop'
 import BlogContainer from './BlogContainer/BlogContainer'
+import CategoryContainer from './Category/CategoryContainer'
 
 export {
     Header,
@@ -23,9 +23,9 @@ export {
     LoginForm,
     SignUpForm,
     AuthLayout, 
-    TextEditor,
     BlogForm,
     BlogCard,
     NavbarDesktop,
-    BlogContainer
+    BlogContainer,
+    CategoryContainer
 }

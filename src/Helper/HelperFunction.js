@@ -7,3 +7,4 @@ export const logout = async() => {
     await authConfig.logoutUser().then((status) => console.log(status)); 
 }
 
+

@@ -1,34 +1,14 @@
-import { useState, useEffect } from "react";
-import databaseConfig from "../../appwrite/databaseConfig";
 import { BlogCard, LoadingScreen } from "../compConfig";
 
-
-
-const BlogContainer = () => {
-    
-    const [Blogs, setBlogs] = useState([]); 
-    const [loading, setLoading] = useState(true); 
-    console.log(Blogs);
-    
-    useEffect(() => {
-        getBlogs(); 
-    },[]); 
-    
-    const getBlogs = async() => {
-       const blogs = await databaseConfig.getPosts(); 
-       setBlogs(blogs.documents); 
-       setLoading(false);
-    }
-
-
+const BlogContainer = ({blogs, loading}) => {
 
     return (
-        <div className=" h-full w-full flex items-center justify-center">
+        <div className="h-full w-full flex items-center justify-center no-scrollbar">
             {
                 loading 
                 ? <LoadingScreen/> 
-                : <div className=" h-full w-full flex flex-col gap-2 items-center overflow-y-scroll">
-                 {Blogs?.map((blog) => {
+                : <div className=" h-auto w-full flex flex-col gap-2 items-center pt-1 pb-4 no-scrollbar">
+                 {blogs?.map((blog) => {
                     return <BlogCard {...blog} key={blog.$id}/>
                   })  } 
                 </div>

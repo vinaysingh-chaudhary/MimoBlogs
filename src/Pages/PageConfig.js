@@ -6,6 +6,7 @@ import LoginPage from './LogIn/LoginPage'
 import SignUpPage from './SignUp/SignUpPage'
 import ReadBlog from "./ReadBlog/ReadBlog";
 import AboutPage from "./About/AboutPage";
+import CategoryPage from './Category/CategoryPage'
 
 export {
     CreateBlog,
@@ -15,6 +16,7 @@ export {
     LoginPage, 
     SignUpPage, 
     ReadBlog,
-    AboutPage
+    AboutPage,
+    CategoryPage
 }
 

@@ -1,32 +1,32 @@
-import { useNavigate } from 'react-router-dom';
-import {BlogContainer, Button} from '../../Components/compConfig'
+import { BlogContainer, CategoryContainer } from "../../Components/compConfig";
+import { getblogs } from "../../Helper/getblogs";
+
 
 const HomePage = () => {
+  const data = getblogs(); 
+  console.log(data?.blogs)
 
-    const navigate = useNavigate(); 
+  return (
+    <div className=" w-full h-auto  flex flex-col bg-mimogray no-scrollbar">
+      <div className=" w-full h-full flex justify-center no-scrollbar">
 
-
-
-
-    return(
-        <div className=' w-full h-[150vh] flex flex-col bg-black'>
-
-            <div className='h-[20vh] w-full border-2 flex justify-center items-center'>
-                
-            </div>
-
-        <div className='w-5/6  h-[130vh] flex justify-center py-5'>
-            <div className='w-4/6 '>
-               <BlogContainer />
-            </div>
-                
-              <div className='w-2/6'>
-
-
-            </div>  
+        <div className="w-2/4 no-scrollbar ">
+          <BlogContainer {...data} />
         </div>
-        </div>
-    )
-}
 
-export default HomePage; 
+        <div className="w-1/3 relative ">
+
+
+              <div className="h-[22%] w-1/4 flex-col flex gap-2 fixed top-20 ml-6">
+                  <p className="text-white text-2xl">Categories</p>
+                  <CategoryContainer />
+              </div>
+
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;

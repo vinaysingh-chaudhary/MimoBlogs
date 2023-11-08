@@ -1,6 +1,6 @@
 const AboutPage = () => {
     return (
-        <div>
+        <div className=" w-full">
             <p>About Page</p>
         </div>
     )

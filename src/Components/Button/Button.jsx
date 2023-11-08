@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = ({label, ...props}) => {
   return (
-    <button className=' px-6 py-3 text-white rounded-[50px] bg-[#454545] shadow-[#6e6e6e] hover:bg-[#2F2F2F] hover:scale-110 transition-transform duration-150 shadow-sm active:bg-[#454545] active:scale-100' {...props}>
+    <button className=' text-white bg-purple-500 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-500 dark:focus:ring-purple-900' {...props}>
       {label}
     </button>
   )

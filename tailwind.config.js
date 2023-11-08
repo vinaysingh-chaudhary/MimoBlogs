@@ -5,8 +5,15 @@ export default {
     "./src/**/*.{js,jsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor:{
+        "mimogray" : "#010101",
+        "card" : "#1818188e"
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
 

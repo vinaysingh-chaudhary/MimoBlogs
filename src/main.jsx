@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { HomePage, ErrorPage,ReadBlog, CreateBlog, EditBlog, LoginPage, SignUpPage, AboutPage } from './Pages/PageConfig.js'
+import { HomePage, ErrorPage,ReadBlog, CreateBlog, EditBlog, LoginPage, SignUpPage, AboutPage, CategoryPage } from './Pages/PageConfig.js'
 import { AuthLayout } from './Components/compConfig.js'
 
 
@@ -37,10 +37,11 @@ const routeConfig = createBrowserRouter([
         },
         {
           path : "/blog/:id", 
-          element: (
-
-                <ReadBlog />
-)
+          element: (<ReadBlog />)
+        },
+        {
+          path : "/category/:category", 
+          element: (<CategoryPage />)
         },
         {
           path : "/edit/:id", 
