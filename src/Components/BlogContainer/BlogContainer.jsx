@@ -3,7 +3,7 @@ import { BlogCard, LoadingScreen } from "../compConfig";
 const BlogContainer = ({blogs, loading}) => {
 
     return (
-        <div className="h-full w-full flex items-center justify-center no-scrollbar">
+        <div className="h-full w-full flex items-center justify-center no-scrollbar ">
             {
                 loading 
                 ? <LoadingScreen/> 

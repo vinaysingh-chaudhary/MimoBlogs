@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="h-[100vh] bg-[#000000] relative no-scrollbar">
+    <div className="h-[100vh] w-[100vw] bg-[#000000] relative">
 
       <div className="h-[8vh] w-full ">
         <NavbarDesktop />

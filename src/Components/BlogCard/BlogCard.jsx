@@ -20,7 +20,6 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
       const likeCount = await databaseConfig.updateSubtractedLike(`${$id}`);
       setLikeCount(likeCount);
     }
-
     try {
     } catch (error) {
       throw error;
@@ -28,33 +27,33 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
   };
 
   return (
-    <div className=" lg:w-[700px] lg:min-h-[200px] border-[0.2px] border-gray-500 flex rounded-3xl p-2 mt-2 text-white bg-card cursor-pointer">
+    <div className="w-[90%] h-[150px] sm:w-[550px] md:w-[520px] md:h-[180px] lg:w-[580px] lg:min-h-[200px] xl:w-[680px] border-[0.2px] border-gray-500 flex justify-between rounded-3xl p-2 mt-2 text-white bg-card cursor-pointer relative">
       <img
-        className=" h-full w-48 aspect-square rounded-2xl object-cover "
+        className=" h-full w-[33%] aspect-square rounded-2xl object-cover "
         src={storageConfig.getFilePreview(articleimage)}
         alt={title}
         onClick={() => navigate(`/blog/${$id}`)}
       />
 
-      <div className="flex flex-col gap-1 justify-around pl-2 py-5 relative">
+      <div className=" w-[66%] flex flex-col gap-1 justify-center pl-2 py-5">
         <div>
-          <p className="text-[#454545]">{date}</p>
-          <p className="text-2xl" onClick={() => navigate(`/blog/${$id}`)}>
+          <p className="text-[#454545] text-[0.8rem]">{date}</p>
+          <p className="text-md sm:text-xl" onClick={() => navigate(`/blog/${$id}`)}>
             {title?.length > 40 ? `${title?.slice(0, 35)}...` : title}
           </p>
         </div>
 
-        <p className="text-[#b8b8b8]" onClick={() => navigate(`/blog/${$id}`)}>
-          {content?.length > 100 ? `${content?.slice(0, 150)}...` : content}
-        </p>
+        <p className="text-[#b8b8b8] md:flex text-[0.8rem] sm:text-lg" onClick={() => navigate(`/blog/${$id}`)}>
+          {content?.length > 100 ? `${content?.slice(0, 60)}...` : content}
+        </p>  
+      </div>
 
-        <button className="absolute bottom-2 right-3 flex gap-2 justify-center items-center" onClick={() => likeHandler()}>
+      <button className=" h-full flex gap-2 justify-center items-end" onClick={() => likeHandler()}>
           <span>{likeCount}</span>
           {isLiked === "liked" 
           ? (<AiFillHeart className="text-red-500 text-2xl" />) 
           :  (<AiOutlineHeart  className="text-2xl"/>)}
         </button>
-      </div>
     </div>
   );
 };
