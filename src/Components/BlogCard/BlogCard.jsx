@@ -3,12 +3,25 @@ import storageConfig from "../../appwrite/storageConfig";
 import { useNavigate } from "react-router-dom";
 import databaseConfig from "../../appwrite/databaseConfig";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useEffect } from "react";
 
 const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
   const navigate = useNavigate();
   const date = $createdAt?.split("T").at(0);
   const [likeCount, setLikeCount] = useState(like);
   const [isLiked, setIsLiked] = useState("unliked");
+
+  // useEffect(() => {
+  //   getImage()
+  // },[])
+
+  // // console.log(articleimage)
+
+  // const getImage = async(articleimage) => {
+  //   const image = await storageConfig.getImages(articleimage)
+  //   console.log(image.files[0].name); 
+  // }
+
 
   const likeHandler = async () => {
     if (isLiked === "unliked") {
@@ -31,6 +44,7 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
       <img
         className=" h-full w-[33%] aspect-square rounded-2xl object-cover "
         src={storageConfig.getFilePreview(articleimage)}
+        content={storageConfig.getFilePreview(articleimage)}
         alt={title}
         onClick={() => navigate(`/blog/${$id}`)}
       />

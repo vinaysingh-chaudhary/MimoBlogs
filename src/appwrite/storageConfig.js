@@ -27,7 +27,6 @@ export class storageService{
     }
 
     
-
     async deleteFile (fileId){
         try {
              await this.storage.deleteFile(
