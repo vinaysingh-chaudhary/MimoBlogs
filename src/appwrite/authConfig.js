@@ -25,7 +25,7 @@ export class Authentication{
            return  userAccount;
         }
         } catch (error) {
-            console.log(error); 
+            throw("Appwrite serive :: createAccount :: error", error);
         }
     }
 
@@ -35,7 +35,7 @@ export class Authentication{
          return await this.account.createEmailSession(email, password, name); 
 
         } catch (error) {
-            console.log(error);
+            throw("Appwrite serive :: loginUser :: error", error);
         }
     }
 
@@ -43,7 +43,7 @@ export class Authentication{
         try {
             return await this.account.deleteSessions();
         } catch (error) {
-            console.log(error); 
+            throw("Appwrite serive :: logoutUser :: error", error);
         }
     }
 
@@ -63,7 +63,7 @@ export class Authentication{
             const user = await this.users.get(userId); 
             return user; 
         } catch (error) {
-            throw(error); 
+            throw("Appwrite serive :: getUserDetails :: error", error);
         }
 
     }
