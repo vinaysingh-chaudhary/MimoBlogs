@@ -1,4 +1,3 @@
-import config from "../config/config";
 import { Client, ID, Storage } from "appwrite";
 
 export class storageService{
@@ -7,8 +6,8 @@ export class storageService{
 
     constructor(){
         this.client
-            .setEndpoint(config.appwriteURL)
-            .setProject(config.projectId)
+            .setEndpoint(import.meta.env.VITE_APPWRITE_URL)
+            .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID)
 
         this.storage = new Storage(this.client);
     }
@@ -17,7 +16,7 @@ export class storageService{
     async uploadFile(File){
         try {
             return await this.storage.createFile(    //this will return the id of the file which we will use createpost's arguments (ariticleimg)
-                config.bucketId,
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
                 ID.unique(),         //this unique id is for file
                 File
             )
@@ -32,7 +31,7 @@ export class storageService{
     async deleteFile (fileId){
         try {
              await this.storage.deleteFile(
-                config.bucketId,
+                import.meta.env.VITE_APPWRITE_BUCKET_ID,
                 fileId
              )
              return true; 
@@ -45,7 +44,7 @@ export class storageService{
 
     getFilePreview(fileId){
         return this.storage.getFilePreview(
-            config.bucketId,
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
             fileId
         )
     }

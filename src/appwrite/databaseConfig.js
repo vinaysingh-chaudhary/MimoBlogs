@@ -1,4 +1,3 @@
-import config from "../config/config";
 import { Client, Databases} from "appwrite";
 
 
@@ -10,8 +9,8 @@ export class DBServices{
 
     constructor(){
         this.client
-                .setEndpoint(config.appwriteURL)
-                .setProject(config.projectId)
+                .setEndpoint(import.meta.env.VITE_APPWRITE_URL)
+                .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID)
             
         this.databases = new Databases(this.client);
     }
@@ -20,8 +19,8 @@ export class DBServices{
         console.log(title)
         try {
             return await this.databases.createDocument(
-                config.databaseId, 
-                config.articleCollectionId, 
+                import.meta.env.VITE_APPWRITE_DATABASE_ID, 
+                import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID, 
                 slug, 
                 {
                     title,
@@ -39,8 +38,8 @@ export class DBServices{
       //we didn't used userId here because we will only provide this update feature to the user who is already logged in
         try {
             return await this.databases.updateDocument(
-                config.databaseId, 
-                config.articleCollectionId, 
+                import.meta.env.VITE_APPWRITE_DATABASE_ID, 
+                import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID, 
                 slug,
                 {
                     title,      //if any thing from these will get upate then updated value will be passed, otherwise old value will get passed
@@ -56,8 +55,8 @@ export class DBServices{
     async deletePost(slug){
         try {
             await this.databases.deleteDocument(
-                config.databaseId,
-                config.articleCollectionId,
+                import.meta.env.VITE_APPWRITE_DATABASE_ID,
+                import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
                 slug
             )
 
@@ -70,8 +69,8 @@ export class DBServices{
     async getDocument(docId){
         try {
             return await this.databases.getDocument(
-                config.databaseId,
-                config.articleCollectionId,
+                import.meta.env.VITE_APPWRITE_DATABASE_ID,
+                import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
                 docId
             )
         } catch (error) {
@@ -82,8 +81,8 @@ export class DBServices{
     async getPosts(queries){
         try {
             return await this.databases.listDocuments(
-                config.databaseId,
-                config.articleCollectionId,
+                import.meta.env.VITE_APPWRITE_DATABASE_ID,
+                import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
                 queries,
             )
         } catch (error) {
@@ -95,8 +94,8 @@ export class DBServices{
     async updateLike(documentID) {
         try {
           const document = await this.databases.getDocument(
-            config.databaseId,
-            config.articleCollectionId,
+            import.meta.env.VITE_APPWRITE_DATABASE_ID,
+            import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
             documentID
           );
     
@@ -104,8 +103,8 @@ export class DBServices{
           this.updatedLikeCount = likeCount + 1; 
     
            await this.databases.updateDocument(
-            config.databaseId,
-            config.articleCollectionId,
+            import.meta.env.VITE_APPWRITE_DATABASE_ID,
+            import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
             documentID,
             {
               like: this.updatedLikeCount,
@@ -121,8 +120,8 @@ export class DBServices{
     async updateSubtractedLike(documentID) {
         try {
           const document = await this.databases.getDocument(
-            config.databaseId,
-            config.articleCollectionId,
+            import.meta.env.VITE_APPWRITE_DATABASE_ID,
+            import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
             documentID
           );
     
@@ -130,8 +129,8 @@ export class DBServices{
           this.updateSubtracted = likeCount === 0 ? 0 : likeCount - 1; 
     
            await this.databases.updateDocument(
-            config.databaseId,
-            config.articleCollectionId,
+            import.meta.env.VITE_APPWRITE_DATABASE_ID,
+            import.meta.env.VITE_APPWRITE_ARTICLE_COLLECTION_ID,
             documentID,
             {
               like: this.updateSubtracted,

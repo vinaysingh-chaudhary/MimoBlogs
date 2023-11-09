@@ -1,6 +1,4 @@
-import config from "../config/config";
 import { Client, Account, ID} from "appwrite";
-
 
 
 export class Authentication{
@@ -9,8 +7,8 @@ export class Authentication{
 
     constructor(){
         this.client
-                .setEndpoint(config.appwriteURL)
-                .setProject(config.projectId)
+                .setEndpoint(import.meta.env.VITE_APPWRITE_URL)
+                .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID)
 
         this.account = new Account(this.client);
     }
