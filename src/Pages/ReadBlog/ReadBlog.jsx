@@ -95,7 +95,7 @@ const ReadBlog = () => {
                 </div>
 
                 <div className="w-[95%] h-auto md:w-[60%]  flex flex-col md:overflow-y-scroll md:gap-6 gap-4 px-2 md:pt-5">
-                    <p className="text-2xl">{blog?.title}</p>
+                    <p className="text-2xl text-center">{blog?.title}</p>
                     <div className={`text-${textSize} text-center`} >{processedText}</div> 
 
                     {isAuthorised && (
