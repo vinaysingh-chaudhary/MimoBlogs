@@ -74,11 +74,11 @@ const ReadBlog = () => {
 
 
     return ( 
-        <div className=" w-full h-full text-white flex flex-col md:flex-row md:justify-around items-center md:items-start">
+        <div className=" w-full h-full text-white flex flex-col md:flex-row md:justify-around items-center md:items-start overflow-y-scroll">
                
-                <div className="w-[95%] h-[50%] mb-5 md:h-full flex-col md:w-[30%] flex justify-start items-center">
-                    <div className="md:mb-4 mt-4">
-                       <img src={imgPreview} alt={blog?.title}  className=" h-full object-contain rounded-lg "/>
+                <div className="w-[95%] md:max-h-[50%] h-[50%] mb-3 md:mb-5 md:h-full flex-col md:w-[30%] flex justify-start items-center ">
+                    <div className="md:mb-4 mt-4 h-[80%] w-full">
+                       <img src={imgPreview} alt={blog?.title}  className=" h-full object-contain rounded-lg aspect-video "/>
                     </div>
 
                     <div className="w-full h-10 md:h-20 flex flex-row md:flex-col justify-center items-center mt-5 md:mt-10 gap-2">
@@ -94,9 +94,9 @@ const ReadBlog = () => {
                    
                 </div>
 
-                <div className="w-[95%] md:w-[60%] h-full flex flex-col overflow-y-scroll md:gap-6 gap-4 px-2 md:pt-5">
+                <div className="w-[95%] h-auto md:w-[60%]  flex flex-col md:overflow-y-scroll md:gap-6 gap-4 px-2 md:pt-5">
                     <p className="text-2xl">{blog?.title}</p>
-                    <div className={`text-${textSize}`} >{processedText}</div> 
+                    <div className={`text-${textSize} text-center`} >{processedText}</div> 
 
                     {isAuthorised && (
                     <div className="flex justify-center gap-5 pb-3">
