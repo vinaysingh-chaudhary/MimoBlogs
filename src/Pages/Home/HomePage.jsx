@@ -31,10 +31,10 @@ const HomePage = () => {
             <CategoryContainer />
           </div>
 
-          <div className="hidden h-[25%] w-1/4 flex-col md:flex gap-2 fixed top-60 ml-6 rounded-2xl bg-[#8080802d] justify-center items-center py-2">
-            <div className="h-[80%] w-[96%] items-start flex flex-col px-3 rounded-xl bg-[#80808036] gap-1 ">
+          <div className="lg:mt-10 lg:pt-4 xl:pt-2 xl:mt-10 2xl:mt-0 2xl:py-4 hidden lg:h-[28%] xl:h-[25%] w-1/4 flex-col lg:flex gap-2 fixed top-60 ml-6 rounded-2xl bg-[#8080802d] justify-center items-center py-2">
+            <div className="h-[80%] w-[94%] xl:w-[96%] items-start flex flex-col px-3 rounded-xl bg-[#80808000] gap-1 lg:pb-5">
               <p className="text-lg text-purple-400">Read before writing</p>
-              <ul className="flex justify-between flex-col gap-1">
+              <ul className="flex justify-between flex-col gap-1 ">
                 {takeCareOf.map((string, index) => {
                   return (
                     <li className=" text-white text-[0.8rem]" key={index}>
@@ -46,9 +46,9 @@ const HomePage = () => {
               </ul>
             </div>
 
-            <div className="h-[20%] mb-2">
+            <div className="h-[20%] mb-4">
               <button
-                className="hidden md:flex py-2.5 mb-2 px-40 text-sm font-medium text-puple-500 bg-gray-200 focus:outline-none rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-500"
+                className="hidden md:flex xl:py-2.5 mb-2 xl:px-32 lg:px-24 lg:py-2.5 text-sm font-medium text-puple-500 bg-gray-200 focus:outline-none rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-500"
                 onClick={() => navigate("/create")}
               >
                 Write
