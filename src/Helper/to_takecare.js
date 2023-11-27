@@ -1,0 +1,1 @@
+export const takeCareOf = ["Strictly prohibit posting explicit or nude content.", " Please avoid hate speech, harassment, or bullying.", "Users must provide warnings for potentially triggering or sensitive content."]

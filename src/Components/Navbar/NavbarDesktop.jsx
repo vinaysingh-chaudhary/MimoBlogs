@@ -8,7 +8,6 @@ import {BsFillPencilFill} from 'react-icons/bs'
 const nav_data = [
   { label: "Home", nav: "/" },
   { label: "About", nav: "/about" },
-  { label: "Socials", nav: "/social" },
 ];
 
 const NavbarDesktop = () => {
