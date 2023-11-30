@@ -40,9 +40,9 @@ const BlogCard = ({ $id, title, articleimage, content, $createdAt, like }) => {
   };
 
   return (
-    <div className="w-[90%] h-[150px] sm:w-[550px] md:w-[520px] md:h-[180px] lg:w-[580px] lg:min-h-[200px] xl:w-[680px] border-[0.2px] border-gray-500 flex justify-between rounded-3xl p-2 mt-2 text-white bg-card cursor-pointer relative">
+    <div className="w-[90%] h-[150px] sm:w-[550px] md:w-[520px] md:h-[180px] lg:w-[580px] lg:min-h-[100px] xl:w-[680px] border-[0.2px] border-gray-500 flex justify-between rounded-3xl p-2 mt-2 text-white bg-card cursor-pointer relative">
       <img
-        className=" h-full w-[33%] aspect-square rounded-2xl object-cover "
+        className=" h-full md:w-[33%] aspect-square rounded-2xl object-cover "
         src={storageConfig.getFilePreview(articleimage)}
         content={storageConfig.getFilePreview(articleimage)}
         alt={title}

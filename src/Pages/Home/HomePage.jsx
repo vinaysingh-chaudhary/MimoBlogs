@@ -31,7 +31,7 @@ const HomePage = () => {
             <CategoryContainer />
           </div>
 
-          <div className="lg:mt-10 lg:pt-4 xl:pt-2 xl:mt-10 2xl:mt-0 2xl:py-4 hidden lg:h-[28%] xl:h-[25%] w-1/4 flex-col lg:flex gap-2 fixed top-60 ml-6 rounded-2xl bg-[#8080802d] justify-center items-center py-2">
+          <div className="lg:mt-10 lg:pt-4 xl:pt-2 xl:mt-10 2xl:mt-0 2xl:py-4 hidden lg:h-[28%] xl:h-[25%] w-1/4 flex-col lg:flex gap-2 fixed lg:top-72 xl:top-60 ml-6 rounded-2xl bg-[#8080802d] justify-center items-center py-2">
             <div className="h-[80%] w-[94%] xl:w-[96%] items-start flex flex-col px-3 rounded-xl bg-[#80808000] gap-1 lg:pb-5">
               <p className="text-lg text-purple-400">Read before writing</p>
               <ul className="flex justify-between flex-col gap-1 ">
